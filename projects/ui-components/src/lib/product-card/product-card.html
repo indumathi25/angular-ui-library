@@ -1,0 +1,58 @@
+<div
+  class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col group cursor-pointer"
+>
+  <!-- Image Container -->
+  <div class="relative h-56 bg-gray-50 overflow-hidden">
+    <img
+      [src]="product.thumbnail"
+      [alt]="product.title"
+      [attr.fetchpriority]="priority ? 'high' : null"
+      class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105"
+    />
+
+    <!-- Badges -->
+    <div class="absolute top-3 right-3 flex flex-col gap-2 items-end">
+      @if (product.discountPercentage > 0) {
+      <span
+        class="inline-flex items-center justify-center bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-sm"
+      >
+        -{{ product.discountPercentage | number : '1.0-0' }}%
+      </span>
+      } @if (product.stock < lowStockThreshold) {
+      <span
+        class="inline-flex items-center justify-center bg-orange-700 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-sm"
+      >
+        Low Stock
+      </span>
+      }
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-5 flex-1 flex flex-col">
+    <!-- Brand & Category -->
+    <div class="flex justify-between items-center mb-2">
+      <span
+        class="text-xs font-medium text-yellow-800 bg-yellow-50 px-2 py-0.5 rounded-full uppercase tracking-wide"
+      >
+        {{ product.category }}
+      </span>
+      <span class="text-xs text-gray-500 font-medium">{{ product.brand }}</span>
+    </div>
+
+    <!-- Title -->
+    <h3
+      class="text-base font-bold text-gray-900 mb-1 line-clamp-1 group-hover:text-yellow-700 transition-colors"
+      [title]="product.title"
+    >
+      {{ product.title }}
+    </h3>
+
+    <!-- Price -->
+    <div class="mt-auto pt-4 flex items-center justify-between">
+      <span class="text-lg font-bold text-gray-900">
+        {{ product.price | currency }}
+      </span>
+    </div>
+  </div>
+</div>
