@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ProductCardComponent } from './product-card.component';
+import { ProductCard } from './product-card';
 
-const meta: Meta<ProductCardComponent> = {
+const meta: Meta<ProductCard> = {
   title: 'Example/ProductCard',
-  component: ProductCardComponent,
+  component: ProductCard,
   decorators: [
     moduleMetadata({
       imports: [RouterTestingModule],
     }),
   ],
   tags: ['autodocs'],
-  render: (args: ProductCardComponent) => ({
+  render: (args: ProductCard) => ({
     props: {
       ...args,
     },
@@ -20,7 +20,7 @@ const meta: Meta<ProductCardComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<ProductCardComponent>;
+type Story = StoryObj<ProductCard>;
 
 export const Default: Story = {
   args: {

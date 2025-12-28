@@ -3,4 +3,4 @@
  */
 
 export * from './lib/product-card/product.interface';
-export * from './lib/product-card/product-card.component';
+export { ProductCard } from './lib/product-card/product-card';

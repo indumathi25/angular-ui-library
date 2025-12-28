@@ -4,7 +4,7 @@
         {
             "name": "Product",
             "id": "interface-Product-a27fe7e541098fe0b9dd816f196c411ea1f8e0feb23df1fa1308d61ac1b20c121c066b0eda3dd621c28ff4756a78df6e27bf31fe59938b5a223089c52475c252",
-            "file": "src/stories/product.interface.ts",
+            "file": "src/stories/product-card/product.interface.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
@@ -160,7 +160,7 @@
     "components": [
         {
             "name": "App",
-            "id": "component-App-68289c4bf0f0cab92ea16808c237526ef4356090dd45b8bb4e3fdc1003e6fb572e7c2da8a66039e4aac883673f42c5ee9761f17a76256814469969b4ede8eda9",
+            "id": "component-App-3fed31005580eddbd5588d9fea14ca70ad7ca602133ecf151f75e2f974aa1033b29ef983e015d4cdc27928034f5d18131bcb38965dab5b358040b57362ce5697",
             "file": "src/app/app.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -220,14 +220,13 @@
                     "name": "RouterOutlet"
                 },
                 {
-                    "name": "ProductCardComponent",
-                    "type": "component"
+                    "name": "ProductCard"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, signal } from '@angular/core';\nimport { RouterOutlet } from '@angular/router';\nimport { ProductCardComponent } from '../stories/product-card.component';\nimport { Product } from '../stories/product.interface';\n\n@Component({\n  selector: 'app-root',\n  imports: [RouterOutlet, ProductCardComponent],\n  templateUrl: './app.html',\n  styleUrl: './app.css',\n})\nexport class App {\n  protected readonly title = signal('taskbox');\n\n  protected readonly product: Product = {\n    id: 1,\n    title: 'iPhone 9',\n    description: 'An apple mobile which is nothing like apple',\n    price: 549,\n    discountPercentage: 12.96,\n    rating: 4.69,\n    stock: 94,\n    brand: 'Apple',\n    category: 'smartphones',\n    thumbnail: 'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp',\n    images: [\n      'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.jpg',\n      'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/2.jpg',\n      'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/3.jpg',\n      'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/4.jpg',\n      'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp',\n    ],\n  };\n}\n",
+            "sourceCode": "import { Component, signal } from '@angular/core';\nimport { RouterOutlet } from '@angular/router';\nimport { ProductCard } from '../stories/product-card/product-card';\nimport { Product } from '../stories/product-card/product.interface';\n\n@Component({\n  selector: 'app-root',\n  imports: [RouterOutlet, ProductCard],\n  templateUrl: './app.html',\n  styleUrl: './app.css',\n})\nexport class App {\n  protected readonly title = signal('taskbox');\n\n  protected readonly product: Product = {\n    id: 1,\n    title: 'iPhone 9',\n    description: 'An apple mobile which is nothing like apple',\n    price: 549,\n    discountPercentage: 12.96,\n    rating: 4.69,\n    stock: 94,\n    brand: 'Apple',\n    category: 'smartphones',\n    thumbnail: 'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp',\n    images: [\n      'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.jpg',\n      'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/2.jpg',\n      'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/3.jpg',\n      'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/4.jpg',\n      'https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp',\n    ],\n  };\n}\n",
             "styleUrl": "./app.css",
             "assetsDirs": [],
             "styleUrlsData": "",
@@ -550,9 +549,9 @@
             "extends": []
         },
         {
-            "name": "ProductCardComponent",
-            "id": "component-ProductCardComponent-78c3a6c49261ea03f56d9faf988679ae08fd2f72d134f3ce5be7f4dd0127fbbb5c7d76cc225fd54d6faccf9318c7d12bb62e64910761564ebfe59323ca3fbf92",
-            "file": "src/stories/product-card.component.ts",
+            "name": "ProductCard",
+            "id": "component-ProductCard-a956688cc8a643d1f5048c576483b97a5b1f136c7846347e52b486f74b639e36dd0029c2d526ff776ed910820472486ba231d2c1a601fb05def13520fc5f0b10",
+            "file": "src/stories/product-card/product-card.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -617,7 +616,7 @@
             "description": "<p>Product Card Component\nDisplays a summary of a product including its image, title, price, and stock status.\nUsed in product lists.</p>\n",
             "rawdescription": "\n\nProduct Card Component\nDisplays a summary of a product including its image, title, price, and stock status.\nUsed in product lists.\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { Product } from './product.interface';\n\n/**\n * Product Card Component\n * Displays a summary of a product including its image, title, price, and stock status.\n * Used in product lists.\n */\n@Component({\n  selector: 'storybook-product-card',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './product-card.html',\n})\nexport class ProductCardComponent {\n  @Input({ required: true }) product!: Product;\n\n  /**\n   * Whether this card should be treated as high priority (e.g., for image loading).\n   * Defaults to false.\n   */\n  @Input() priority = false;\n\n  /**\n   * Threshold value to determine if the product is low on stock.\n   * Defaults to 10.\n   */\n  @Input() lowStockThreshold = 10;\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { Product } from './product.interface';\n\n/**\n * Product Card Component\n * Displays a summary of a product including its image, title, price, and stock status.\n * Used in product lists.\n */\n@Component({\n  selector: 'storybook-product-card',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './product-card.html',\n})\nexport class ProductCard {\n  @Input({ required: true }) product!: Product;\n\n  /**\n   * Whether this card should be treated as high priority (e.g., for image loading).\n   * Defaults to false.\n   */\n  @Input() priority = false;\n\n  /**\n   * Threshold value to determine if the product is low on stock.\n   * Defaults to 10.\n   */\n  @Input() lowStockThreshold = 10;\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -748,16 +747,16 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/product-card.component.ts",
+                "filePath": "src/stories/product-card/product-card.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "ProductCardComponent",
+                "name": "ProductCard",
                 "coveragePercent": 75,
                 "coverageCount": "3/4",
                 "status": "good"
             },
             {
-                "filePath": "src/stories/product.interface.ts",
+                "filePath": "src/stories/product-card/product.interface.ts",
                 "type": "interface",
                 "linktype": "interface",
                 "name": "Product",

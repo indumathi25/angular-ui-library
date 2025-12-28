@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProductCardComponent } from '../stories/product-card.component';
-import { Product } from '../stories/product.interface';
+import { ProductCard } from '../stories/product-card/product-card';
+import { Product } from '../stories/product-card/product.interface';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProductCardComponent],
+  imports: [RouterOutlet, ProductCard],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

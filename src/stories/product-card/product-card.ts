@@ -13,7 +13,7 @@ import { Product } from './product.interface';
   imports: [CommonModule],
   templateUrl: './product-card.html',
 })
-export class ProductCardComponent {
+export class ProductCard {
   @Input({ required: true }) product!: Product;
 
   /**
