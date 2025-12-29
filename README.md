@@ -1,103 +1,265 @@
-<p align="center">
-  <a href="https://www.chromatic.com/">
-    <img alt="Chromatic" src="https://avatars2.githubusercontent.com/u/24584319?s=200&v=4" width="60" />
-  </a>
-</p>
+# Angular UI Components Library
 
-<h1 align="center">
-  Chromatic's Intro to Storybook Angular template
-</h1>
+A reusable Angular component library with Storybook documentation and automated npm publishing.
 
-This template ships with the main Angular and Storybook configuration files you'll need to get up and running fast.
+## 📦 Published Package
 
-## 🚅 Quick start
+**Package Name:** `indumathi25-ui-components`
 
-1.  **Create the application.**
+```bash
+npm install indumathi25-ui-components
+```
 
-    Use [degit](https://github.com/Rich-Harris/degit) to get this template.
+**npm Registry:** https://www.npmjs.com/package/indumathi25-ui-components
 
-    ```shell
-    # Clone the template
-    npx degit chromaui/intro-storybook-angular-template taskbox
-    ```
+## 🏗️ High-Level Architecture Decisions
 
-1.  **Install the dependencies.**
+### 1. **Library Structure**
+- **Angular Library:** Built using Angular's library generation tools (`ng-packagr`)
+- **Standalone Components:** All components are standalone for better tree-shaking and flexibility
+- **Location:** `projects/ui-components/` - Separated from the main application
+- **Reason:** Enables independent versioning, building, and publishing of components
 
-    Navigate into your new site’s directory and install the necessary dependencies.
+### 2. **Component Documentation**
+- **Storybook Integration:** Interactive component documentation and testing
+- **Stories Location:** `src/stories/` - Contains demo implementations
+- **Run Storybook:** `npm run storybook`
+- **Reason:** Provides interactive playground for components, visual regression testing, and documentation
 
-    ```shell
-    # Navigate to the directory
-    cd taskbox/
+### 3. **Publishing Strategy**
+- **Registry:** Public npm registry (npmjs.org)
+- **Package Naming:** Unscoped package (`indumathi25-ui-components`)
+- **Access:** Public - no authentication required for installation
+- **Reason:** Maximum accessibility, no organization setup needed, easier for consumers
 
-    # Install the dependencies
-    npm install
-    ```
+### 4. **CI/CD Pipeline**
+- **Platform:** GitHub Actions
+- **Trigger:** Automatic deployment on push to `main` branch
+- **Authentication:** Trusted Publishing with OIDC (OpenID Connect)
+  - No manual token management
+  - Enhanced security with provenance attestation
+  - Environment-based deployment control
+- **Workflow:** `.github/workflows/publish-npm.yml`
+- **Reason:** Eliminates token rotation risks, provides supply chain security, automated releases
 
-1.  **Open the source code and start editing!**
+### 5. **Version Management**
+- **Strategy:** Manual versioning in `package.json`
+- **Location:** `projects/ui-components/package.json`
+- **Convention:** Semantic versioning (MAJOR.MINOR.PATCH)
+- **Reason:** Explicit control over releases, clear communication of breaking changes
 
-    Open the `taskbox` directory in your code editor of choice and building your first component!
+### 6. **Component Export Strategy**
+- **Public API:** All exports managed through `public-api.ts`
+- **Naming:** Clean component names (e.g., `ProductCard` instead of `ProductCardComponent`)
+- **Tree-shakeable:** Only imported components are bundled
+- **Reason:** Controlled API surface, better DX, optimized bundle sizes
 
-1.  **Browse your stories!**
+## 📁 Project Structure
 
-    Run `npm run storybook` to see your component's stories at `http://localhost:6006`.
+```
+taskbox/
+├── .github/
+│   └── workflows/
+│       └── publish-npm.yml          # CI/CD pipeline
+├── projects/
+│   └── ui-components/               # Publishable library
+│       ├── src/
+│       │   ├── lib/                 # Component implementations
+│       │   │   └── product-card/
+│       │   └── public-api.ts        # Public exports
+│       └── package.json             # Library metadata & version
+├── src/
+│   ├── app/                         # Demo application
+│   └── stories/                     # Storybook stories
+│       └── product-card/
+├── angular.json                     # Angular configuration
+├── package.json                     # Root dependencies
+└── README.md
+```
 
-## 🔎 What's inside?
+## 🚀 Getting Started
 
-A quick look at the top-level files and directories included with this template.
+### Development Setup
 
-    .
-    ├── .storybook
-    ├── .vscode
-    ├── node_modules
-    ├── public
-    ├── src
-    ├── .editorconfig
-    ├── .gitignore
-    ├── angular.json
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    ├── tsconfig.app.json
-    ├── tsconfig.json
-    ├── tsconfig.spec.json
-    └── README.md
+1. **Install dependencies:**
+   ```bash
+   cd taskbox
+   npm install
+   ```
 
-1.  **`.storybook`**: This directory contains Storybook's [configuration](https://storybook.js.org/docs/react/configure/overview) files.
+2. **Run Storybook:**
+   ```bash
+   npm run storybook
+   ```
+   Opens at `http://localhost:6006`
 
-2.  **`.vscode`**: This directory contains [Visual Studio Code](https://code.visualstudio.com/) specific settings, like recommended extensions.
+3. **Build library:**
+   ```bash
+   npx ng build ui-components
+   ```
+   Output in `dist/ui-components/`
 
-3.  **`node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages).
+4. **Run demo app:**
+   ```bash
+   npm start
+   ```
 
-4.  **`public`**: This directory will contain the development and production build of the site.
+### Publishing
 
-5.  **`src`**: This directory will contain all of the code related to what you will see on your application.
+#### Manual Publishing
+```bash
+# Update version in projects/ui-components/package.json
+npm run build ui-components
+cd dist/ui-components
+npm publish
+```
 
-6.  **`.editorconfig`**: This file contains the configurations for [EditorConfig](https://editorconfig.org/).
+#### Automatic Publishing (CI/CD)
+1. Update version in `projects/ui-components/package.json`
+2. Commit changes
+3. Push to `main` branch
+4. GitHub Actions automatically builds and publishes
 
-7.  **`.gitignore`**: This file tells git which files it should not track or maintain during the development process of your project.
+## 📚 Available Components
 
-8.  **`angular.json`**: This file contains all the configurations required for your Angular project.
+### ProductCard
 
-9.  **`LICENSE`**: The template is licensed under the MIT licence.
+Display product information including image, title, price, and stock status.
 
-10. **`package-lock.json`**: This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(Do not change it manually).**
+**Import:**
+```typescript
+import { ProductCard } from 'indumathi25-ui-components';
+```
 
-11. **`package.json`**: Standard manifest file for Node.js projects, which typically includes project specific metadata (such as the project's name, the author among other information). It's based on this file that npm will know which packages are necessary to the project.
+**Usage:**
+```typescript
+import { Component } from '@angular/core';
+import { ProductCard } from 'indumathi25-ui-components';
 
-12. **`tsconfig.app.json`**: This file contains auxiliary configurations for your Angular project.
+@Component({
+  selector: 'app-my-component',
+  standalone: true,
+  imports: [ProductCard],
+  template: `
+    <storybook-product-card 
+      [product]="product"
+      [priority]="true"
+      [lowStockThreshold]="10">
+    </storybook-product-card>
+  `
+})
+export class MyComponent {
+  product = {
+    id: 1,
+    name: 'Wireless Headphones',
+    price: 79.99,
+    image: 'assets/product.jpg',
+    stock: 15
+  };
+}
+```
 
-13. **`tsconfig.json`**: This file contains configurations the required configurations for TypeScript.
+**Inputs:**
+- `product` (required): Product object with:
+  - `id: number`
+  - `name: string`
+  - `price: number`
+  - `image: string`
+  - `stock: number`
+- `priority`: Boolean for high-priority image loading (default: `false`)
+- `lowStockThreshold`: Number to determine low stock warning (default: `10`)
 
-14. **`tsconfig.spec.json`**: This is a TypeScript configuration file aimed for application testing.
+## 🔧 Configuration
 
-15. **`README.md`**: A text file containing useful reference information about the project.
+### npm Trusted Publishing Setup
 
-## Contribute
+The project uses npm's Trusted Publishing for secure, tokenless authentication:
 
-If you encounter an issue with the template, we encourage you to open an issue in this template's repository.
+**Configuration:**
+- **Provider:** GitHub Actions
+- **GitHub Org/User:** indumathi25
+- **Repository:** angular-ui-library
+- **Workflow:** publish-npm.yml
+- **Environment:** npm-publish
 
-## Learning Storybook
+**Benefits:**
+- ✅ No token management required
+- ✅ Automatic token rotation
+- ✅ Supply chain security with provenance
+- ✅ Audit trail of all publications
 
-1. Read our introductory tutorial at [Learn Storybook](https://storybook.js.org/tutorials/intro-to-storybook/angular/en/get-started/).
+### GitHub Environment
 
-2. See our official documentation at [Storybook](https://storybook.js.org/).
+Create `npm-publish` environment in repository settings:
+1. Go to Settings → Environments
+2. Create new environment: `npm-publish`
+3. Optional: Add protection rules (e.g., required reviewers)
+
+## 🛠️ Scripts
+
+```bash
+npm run storybook          # Start Storybook dev server
+npm run build-storybook    # Build static Storybook
+npm run build              # Build main application
+npm start                  # Start dev server
+npm test                   # Run tests
+```
+
+## 📝 Adding New Components
+
+1. **Generate component in library:**
+   ```bash
+   cd projects/ui-components
+   ng generate component lib/my-component
+   ```
+
+2. **Export in public API:**
+   Edit `projects/ui-components/src/public-api.ts`:
+   ```typescript
+   export { MyComponent } from './lib/my-component/my-component';
+   ```
+
+3. **Create Storybook story:**
+   Add `src/stories/my-component/MyComponent.stories.ts`
+
+4. **Update version:**
+   Increment version in `projects/ui-components/package.json`
+
+5. **Commit and push:**
+   Changes will automatically publish via GitHub Actions
+
+## 🔄 Version Guidelines
+
+Follow semantic versioning:
+- **MAJOR** (x.0.0): Breaking changes
+- **MINOR** (0.x.0): New features, backward compatible
+- **PATCH** (0.0.x): Bug fixes, backward compatible
+
+Example:
+- `0.0.1` → `0.0.2`: Bug fix
+- `0.0.2` → `0.1.0`: New component added
+- `0.1.0` → `1.0.0`: Breaking API change
+
+## 📄 License
+
+MIT
+
+## 🔗 Links
+
+- **npm Package:** https://www.npmjs.com/package/indumathi25-ui-components
+- **Repository:** https://github.com/indumathi25/angular-ui-library
+- **Storybook Tutorial:** https://storybook.js.org/tutorials/intro-to-storybook/angular/en/get-started/
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests and stories
+5. Submit a pull request
+
+## 📞 Support
+
+For issues and questions:
+- Open an issue on GitHub
+- Check existing documentation in Storybook
