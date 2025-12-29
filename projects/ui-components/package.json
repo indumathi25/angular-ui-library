@@ -1,7 +1,9 @@
 {
   "name": "@indumathidev/indumathi25-ui-components",
   "version": "0.0.2",
+  "description": "Reusable Angular UI components",
   "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "repository": {
@@ -9,8 +11,8 @@
     "url": "https://github.com/indumathi25/angular-ui-library.git"
   },
   "peerDependencies": {
-    "@angular/common": "^20.3.0",
-    "@angular/core": "^20.3.0"
+    "@angular/common": "^20.0.0 || ^21.0.0",
+    "@angular/core": "^20.0.0 || ^21.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
