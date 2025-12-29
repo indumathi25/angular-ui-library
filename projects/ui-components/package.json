@@ -1,7 +1,7 @@
 {
   "name": "indumathi25-ui-components",
   "version": "0.0.1",
-  "description": "Reusable Angular UI components",
+  "description": "Reusable Angular UI components library",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
