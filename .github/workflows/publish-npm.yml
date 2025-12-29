@@ -24,16 +24,12 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: |
-          cd taskbox
-          npm ci
+        run: npm ci
 
       - name: Build library
-        run: |
-          cd taskbox
-          npx ng build ui-components
+        run: npx ng build ui-components
 
       - name: Publish to npm
         run: |
-          cd taskbox/dist/ui-components
+          cd dist/ui-components
           npm publish --provenance --access public
